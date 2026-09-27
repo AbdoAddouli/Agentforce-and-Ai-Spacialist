@@ -27,8 +27,12 @@
  * ========================================================================== */
 
 const REPO = 'https://github.com/AbdoAddouli/Agentforce-and-Ai-Spacialist';
-const GUIDE = REPO + '/blob/main/developer%20Agentforce%20Specialist%20Roadmap/';
-const GUIDE_RAW = REPO + '/raw/main/developer%20Agentforce%20Specialist%20Roadmap/';
+// The phase guides live in docs/guide/, not in a top-level folder. These two
+// bases back the "raw" and "Open the guide on GitHub" links on every phase and
+// guide page, and build-data.mjs in Abdo-s-Salesforce-Academy reuses GUIDE as
+// the hub's guideBase, so a wrong path here breaks links in both sites.
+const GUIDE = REPO + '/blob/main/docs/guide/';
+const GUIDE_RAW = REPO + '/raw/main/docs/guide/';
 
 /* ==========================================================================
    EXAM FACTS  (Spring '26 blueprint)
