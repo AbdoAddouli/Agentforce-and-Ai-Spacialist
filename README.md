@@ -11,7 +11,8 @@ exam, in two halves:
    dashboard. A reference implementation of the architecture the exam asks
    about.
 
-Nothing here is deployed. See [Status](#status).
+The study site is published on GitHub Pages. **No Salesforce org has been
+deployed.** See [Status](#status).
 
 ---
 
@@ -28,6 +29,23 @@ npm run site:serve
 
 Or just open `docs/index.html` directly. The site is plain HTML, CSS and
 JavaScript with no build step and no external runtime dependencies.
+
+### Published site
+
+The site is live at:
+
+**<https://abdoaddouli.github.io/Agentforce-and-Ai-Spacialist/>**
+
+It is published by GitHub Pages directly from the `docs/` folder on `main`,
+so there is nothing to build or release: push a change to `docs/` on `main`
+and it goes live on its own. `docs/.nojekyll` stops Pages from running the
+content through Jekyll, which would otherwise ignore the `assets/` and
+`guide/` folders.
+
+`.github/workflows/ci.yml` deliberately does *not* deploy the site. It only
+validates the curriculum and metadata on every push, and offers an optional
+manual scratch-org job. Keeping publishing on the branch means the site
+cannot be taken offline by a failed workflow or an expired token.
 
 ### Validate everything
 
@@ -184,8 +202,9 @@ Complete    Site, 17 modules, 17 guides, 17 answers, both validators,
             20 tests, all metadata written
 Verified    XML structure, internal reference consistency, manifest
             freshness, curriculum/answer/guide integrity
+Published   Study site live on GitHub Pages, from docs/ on main
 NOT done    Apex compilation, Apex test execution, Metadata API
-            validation, any deploy, any publishing
+            validation, any deploy to a Salesforce org
 ```
 
 `ARCHITECTURE.md` §5 lists the same table in full. The metadata is

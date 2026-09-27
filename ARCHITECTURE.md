@@ -155,6 +155,7 @@ observability objects means the agent did not run.
 [done] 45 XML files well-formed (structural check)
 [done] 20 Node tests pass
 [done] manifest regenerated from disk: 68 members, 11 types
+[done] study site published on GitHub Pages from docs/ on main
 [NOT done] Apex compilation        - requires an org
 [NOT done] Apex test execution     - requires an org
 [NOT done] Metadata API validation - requires sf project deploy validate
