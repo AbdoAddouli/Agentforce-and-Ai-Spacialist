@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actions>
+        <actionName>Edit</actionName>
+        <actionName>Delete</actionName>
+        <actionName>New</actionName>
+        <actionName>View</actionName>
+    </actions>
+    <label>Training Question</label>
+    <pluralLabel>Training Questions</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <name>Agent_Test_Suite_Health</name>
+    <reportType>Agent_Test_Run__c</reportType>
+    <scope>user</scope>
+    <summary>Pass rate and credit spend per run category. A category with no rows has not been tested, which is different from a category that passed.</summary>
+    <timeRangeFilter>
+        <startDate>2026-01-01</startDate>
+    </timeRangeFilter>
+</Report>

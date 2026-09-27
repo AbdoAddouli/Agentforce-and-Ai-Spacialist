@@ -1,0 +1,8 @@
+.sfdx/
+.sf/
+node_modules/
+force-app/main/default/objects/*/listViews/
+docs/assets/curriculum.js
+docs/assets/answers.js
+developer Agentforce Specialist Roadmap/
+docs/guide/

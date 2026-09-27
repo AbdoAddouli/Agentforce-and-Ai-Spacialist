@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <body>A refund action is waiting for a human decision.<br/><br/>Action: {!Action_Definition__c.Name}<br/>Session: {!Agent_Action_Audit__c.Session_Id__c}<br/>Parameters: {!Agent_Action_Audit__c.Parameters_Json__c}<br/><br/>Approve only if the amount is within policy. The agent prepared this; it cannot approve it.</body>
+    <description>A refund action is waiting for a human decision.Action: {!Action_Definition__c.Name}Sessio</description>
+    <name>Refund_Request_Notification</name>
+    <subject>Refund request awaiting approval: {!Action_Definition__c.Name}</subject>
+    <type>custom</type>
+</EmailTemplate>

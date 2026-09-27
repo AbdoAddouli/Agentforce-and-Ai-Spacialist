@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PlatformEvent xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <description>Raised when a session is escalated rather than answered. Subscribers use this to drive Command Center and the credit budget alert.</description>
+    <label>Agent Session Escaped</label>
+    <publishBehavior>PublishAfterCommit</publishBehavior>
+    <fields>
+        <field><fullName>Session_Id__c</fullName><isIndexed>false</isIndexed><required>true</required><type>Text</type><length>80</length></field>
+        <field><fullName>Agent_Key__c</fullName><isIndexed>false</isIndexed><required>false</required><type>Text</type><length>80</length></field>
+        <field><fullName>Reason__c</fullName><isIndexed>false</isIndexed><required>true</required><type>Text</type><length>80</length></field>
+        <field><fullName>Credits_Used__c</fullName><isIndexed>false</isIndexed><required>false</required><type>Number</type><precision>12</precision><scale>4</scale></field>
+        <field><fullName>Subagent_Name__c</fullName><isIndexed>false</isIndexed><required>false</required><type>Text</type><length>80</length></field>
+    </fields>
+</PlatformEvent>

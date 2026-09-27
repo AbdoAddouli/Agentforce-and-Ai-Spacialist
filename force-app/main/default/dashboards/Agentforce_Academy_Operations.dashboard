@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Dashboard xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Operational view of the agent: what escaped, what it cost, what failed and what is not covered. A dashboard that shows only success rates hides the escalation volume, which is the number that matters.</description>
+    <dashboardComponents>
+        <componentName>Agent_Escape_Rate</componentName>
+        <componentType>Report</componentType>
+        <report>Agent_Escape_Rate</report>
+    </dashboardComponents>
+    <dashboardComponents>
+        <componentName>Flex_Credit_Burn_By_Cost_Center</componentName>
+        <componentType>Report</componentType>
+        <report>Flex_Credit_Burn_By_Cost_Center</report>
+    </dashboardComponents>
+    <dashboardComponents>
+        <componentName>Action_Failure_Triage</componentName>
+        <componentType>Report</componentType>
+        <report>Action_Failure_Triage</report>
+    </dashboardComponents>
+    <dashboardComponents>
+        <componentName>Agent_Test_Suite_Health</componentName>
+        <componentType>Report</componentType>
+        <report>Agent_Test_Suite_Health</report>
+    </dashboardComponents>
+    <dashboardComponents>
+        <componentName>Grounding_Source_Coverage</componentName>
+        <componentType>Report</componentType>
+        <report>Grounding_Source_Coverage</report>
+    </dashboardComponents>
+    <dashboardRefreshFrequency>Hourly</dashboardRefreshFrequency>
+    <name>Agentforce_Academy_Operations</name>
+    <type>Specified</type>
+</Dashboard>

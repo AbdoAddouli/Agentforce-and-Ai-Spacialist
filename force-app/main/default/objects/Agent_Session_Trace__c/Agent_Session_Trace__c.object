@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Agent Session Trace</label>
+    <pluralLabel>Agent Session Traces</pluralLabel>
+    <description>Ordered step-by-step record. This is what makes an intermittent failure diagnosable.</description>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <sharingModel>ReadWrite</sharingModel>
+    <enableActivities>false</enableActivities>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <visibility>Public</visibility>
+        <fields>
+          <fullName>Name</fullName>
+          <label>Name</label>
+          <type>Text</type>
+          <length>80</length>
+          <required>true</required>
+        </fields>
+        <fields>
+          <fullName>Session_Id__c</fullName>
+          <label>Session Id</label>
+          <required>true</required>
+          <type>Text</type>
+            <length>80</length>
+        </fields>
+        <fields>
+          <fullName>Step_Number__c</fullName>
+          <label>Step Number</label>
+          <type>Number</type>
+            <precision>5</precision>
+            <scale>0</scale>
+        </fields>
+        <fields>
+          <fullName>Step_Type__c</fullName>
+          <label>Step Type</label>
+          <type>Picklist</type>
+            <valueSet>
+              <restricted>true</restricted>
+<valueSetDefinition>
+                <sorted>false</sorted>
+                <value><fullName>Reason</fullName><default>true</default></value>
+                <value><fullName>Ground</fullName><default>false</default></value>
+                <value><fullName>Subagent</fullName><default>false</default></value>
+                <value><fullName>Act</fullName><default>false</default></value>
+                <value><fullName>Escalate</fullName><default>false</default></value>
+              </valueSetDefinition>
+            </valueSet>
+        </fields>
+        <fields>
+          <fullName>Subagent_Name__c</fullName>
+          <label>Subagent Name</label>
+          <type>Text</type>
+            <length>80</length>
+        </fields>
+        <fields>
+          <fullName>Records_Retrieved__c</fullName>
+          <label>Records Retrieved</label>
+          <type>Number</type>
+            <precision>6</precision>
+            <scale>0</scale>
+        </fields>
+        <fields>
+          <fullName>Action_Name__c</fullName>
+          <label>Action Name</label>
+          <type>Text</type>
+            <length>80</length>
+        </fields>
+        <fields>
+          <fullName>Cost_Flex_Credits__c</fullName>
+          <label>Cost (Flex Credits)</label>
+          <type>Number</type>
+            <precision>12</precision>
+            <scale>4</scale>
+        </fields>
+        <fields>
+          <fullName>Detail__c</fullName>
+          <label>Detail</label>
+          <type>LongTextArea</type>
+            <length>32768</length>
+            <visibleLines>6</visibleLines>
+        </fields>
+</CustomObject>

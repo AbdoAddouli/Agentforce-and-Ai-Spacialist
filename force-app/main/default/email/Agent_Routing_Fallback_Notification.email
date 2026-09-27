@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <body>A session was escalated because no subagent cleared the routing threshold.<br/><br/>Session: {!Agent_Interaction_Log__c.Session_Id__c}<br/>Outcome: {!Agent_Interaction_Log__c.Outcome__c}<br/><br/>A routing decline is a designed outcome, not an incident. Review only if the rate rises.</body>
+    <description>A session was escalated because no subagent cleared the routing threshold.Session: {!Agent</description>
+    <name>Agent_Routing_Fallback_Notification</name>
+    <subject>Routing declined: escalation raised for session {!Agent_Interaction_Log__c.Session_Id__c}</subject>
+    <type>custom</type>
+</EmailTemplate>

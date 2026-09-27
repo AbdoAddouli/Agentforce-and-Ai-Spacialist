@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agentforce Specialist Academy - Learn Salesforce AI Agents</title>
+  <meta name="description" content="Interactive, self-paced course: 17 modules covering the current Salesforce Certified Agentforce Specialist blueprint (Spring '26) - Agentforce architecture, subagents, Agent Script, prompt engineering, Data 360 grounding, actions, testing, observability, governance, MCP/A2A orchestration, plus exercises, answers and use-case solutions." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'&#129522;</text></svg>" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <script>
+    (function() {
+      var t = localStorage.getItem('afacademy-theme');
+      if (!t) t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+</head>
+<body>
+
+  <div class="shell">
+
+    <aside class="sidebar">
+      <!-- filled by app.js -->
+    </aside>
+
+    <div class="content">
+
+      <header class="topbar">
+        <button class="menu-btn" id="menuBtn" aria-label="Menu">&#9776;</button>
+        <a class="brand" href="#/">
+          <span class="logo">&#129522;</span>
+          <span class="brand-text">
+            <b>Agentforce Specialist</b><small>Academy</small>
+          </span>
+        </a>
+        <div class="tb-search">
+          <input id="topSearch" type="search" placeholder="Search lessons, subagents, prompts.  (press /)" autocomplete="off" />
+          <span class="kbd">/</span>
+        </div>
+        <button class="track-btn" id="trackToggle" title="Highlight the Summer '26 maintenance track">
+          <span class="tb-led"></span><span id="trackLabel">Maintenance track</span>
+        </button>
+        <div class="tb-meter" title="Roadmap progress">
+          <div class="tb-bar"><i id="topBar"></i></div>
+          <span id="topPct" class="tb-pct">0%</span>
+        </div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode" title="Toggle theme">🌙</button>
+      </header>
+
+      <main id="view"></main>
+
+      <footer class="footer">
+        <a href="https://github.com/AbdoAddouli/Agentforce-and-Ai-Spacialist" target="_blank" rel="noopener">AbdoAddouli/Agentforce-and-Ai-Spacialist</a>
+        <span>&middot;</span>
+        <span>Salesforce Certified Agentforce Specialist learning academy - API 68.0</span>
+        <span>&middot;</span>
+        <span>Progress is saved in your browser</span>
+      </footer>
+
+    </div>
+  </div>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <script src="assets/curriculum.js"></script>
+  <script src="assets/answers.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "orgName": "Agentforce Specialist Roadmap",
+  "edition": "Developer",
+  "features": [
+    "EnableSetPasswordInApi",
+    "PlatformEvents",
+    "PersonAccounts",
+    "AuthorApex"
+  ],
+  "settings": {
+    "lightningExperienceSettings": {
+      "enableS1DesktopEnabled": true
+    },
+    "mobileSettings": {
+      "enableS1EncryptedStoragePref2": false
+    },
+    "securitySettings": {
+      "passwordPolicies": {
+        "enableSetPasswordInApi": true
+      }
+    }
+  }
+}

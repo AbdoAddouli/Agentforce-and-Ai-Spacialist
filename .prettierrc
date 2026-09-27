@@ -1,0 +1,21 @@
+{
+  "trailingComma": "none",
+  "singleQuote": true,
+  "tabWidth": 2,
+  "printWidth": 80,
+  "plugins": ["prettier-plugin-apex"],
+  "overrides": [
+    {
+      "files": "**/*.cls",
+      "options": { "tabWidth": 4, "printWidth": 80 }
+    },
+    {
+      "files": "**/*.trigger",
+      "options": { "tabWidth": 4, "printWidth": 80 }
+    },
+    {
+      "files": "**/*.md",
+      "options": { "printWidth": 100, "proseWrap": "preserve" }
+    }
+  ]
+}

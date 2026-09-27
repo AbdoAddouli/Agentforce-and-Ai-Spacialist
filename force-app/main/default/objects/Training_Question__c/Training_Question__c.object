@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Training Question</label>
+    <pluralLabel>Training Questions</pluralLabel>
+    <description>Weighted practice questions aligned to the published exam blueprint.</description>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <sharingModel>ReadWrite</sharingModel>
+    <enableActivities>false</enableActivities>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <visibility>Public</visibility>
+        <fields>
+          <fullName>Name</fullName>
+          <label>Name</label>
+          <type>Text</type>
+          <length>80</length>
+          <required>true</required>
+        </fields>
+        <fields>
+          <fullName>Domain__c</fullName>
+          <label>Domain</label>
+          <type>Picklist</type>
+            <valueSet>
+              <restricted>true</restricted>
+<valueSetDefinition>
+                <sorted>false</sorted>
+                <value><fullName>AI Agents</fullName><default>true</default></value>
+                <value><fullName>Prompt Engineering</fullName><default>false</default></value>
+                <value><fullName>Data 360 Fundamentals</fullName><default>false</default></value>
+                <value><fullName>Testing, Deployment & Maintenance</fullName><default>false</default></value>
+                <value><fullName>Governance & Observability</fullName><default>false</default></value>
+                <value><fullName>Multi-Agent Orchestration</fullName><default>false</default></value>
+              </valueSetDefinition>
+            </valueSet>
+        </fields>
+        <fields>
+          <fullName>Weight__c</fullName>
+          <label>Weight</label>
+          <type>Number</type>
+            <precision>5</precision>
+            <scale>0</scale>
+            <defaultValue>1</defaultValue>
+        </fields>
+        <fields>
+          <fullName>Question_Text__c</fullName>
+          <label>Question Text</label>
+          <type>LongTextArea</type>
+            <length>32768</length>
+            <visibleLines>6</visibleLines>
+        </fields>
+        <fields>
+          <fullName>Options_Json__c</fullName>
+          <label>Options JSON</label>
+          <type>LongTextArea</type>
+            <length>4000</length>
+            <visibleLines>6</visibleLines>
+        </fields>
+        <fields>
+          <fullName>Correct_Index__c</fullName>
+          <label>Correct Index</label>
+          <type>Number</type>
+            <precision>2</precision>
+            <scale>0</scale>
+        </fields>
+        <fields>
+          <fullName>Rationale__c</fullName>
+          <label>Rationale</label>
+          <type>LongTextArea</type>
+            <length>2000</length>
+            <visibleLines>6</visibleLines>
+        </fields>
+        <fields>
+          <fullName>Source_Phase__c</fullName>
+          <label>Source Phase</label>
+          <type>Number</type>
+            <precision>3</precision>
+            <scale>0</scale>
+        </fields>
+</CustomObject>

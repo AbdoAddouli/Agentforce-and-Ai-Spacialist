@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Model Endpoint Config</label>
+    <pluralLabel>Model Endpoint Configs</pluralLabel>
+    <description>Approved model endpoints. Only an approved, active entry may be selected at runtime.</description>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <sharingModel>ReadWrite</sharingModel>
+    <enableActivities>false</enableActivities>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <visibility>Public</visibility>
+        <fields>
+          <fullName>Name</fullName>
+          <label>Name</label>
+          <type>Text</type>
+          <length>80</length>
+          <required>true</required>
+        </fields>
+        <fields>
+          <fullName>Provider__c</fullName>
+          <label>Provider</label>
+          <type>Picklist</type>
+            <valueSet>
+              <restricted>true</restricted>
+<valueSetDefinition>
+                <sorted>false</sorted>
+                <value><fullName>Salesforce</fullName><default>true</default></value>
+                <value><fullName>Partner</fullName><default>false</default></value>
+                <value><fullName>BYO</fullName><default>false</default></value>
+              </valueSetDefinition>
+            </valueSet>
+        </fields>
+        <fields>
+          <fullName>Model_Version__c</fullName>
+          <label>Model Version</label>
+          <required>true</required>
+          <type>Text</type>
+            <length>80</length>
+        </fields>
+        <fields>
+          <fullName>Residency__c</fullName>
+          <label>Residency</label>
+          <type>Text</type>
+            <length>80</length>
+        </fields>
+        <fields>
+          <fullName>Zero_Retention__c</fullName>
+          <label>Zero Retention</label>
+          <type>Checkbox</type>
+            <defaultValue>false</defaultValue>
+        </fields>
+        <fields>
+          <fullName>Masking_Policy__c</fullName>
+          <label>Masking Policy</label>
+          <type>Text</type>
+            <length>255</length>
+        </fields>
+        <fields>
+          <fullName>Approved_By__c</fullName>
+          <label>Approved By</label>
+          <type>Text</type>
+            <length>80</length>
+        </fields>
+        <fields>
+          <fullName>Approved_On__c</fullName>
+          <label>Approved On</label>
+          <type>Date</type>
+        </fields>
+        <fields>
+          <fullName>Max_Tokens_Per_Call__c</fullName>
+          <label>Max Tokens Per Call</label>
+          <type>Number</type>
+            <precision>10</precision>
+            <scale>0</scale>
+        </fields>
+        <fields>
+          <fullName>Is_Active__c</fullName>
+          <label>Active</label>
+          <type>Checkbox</type>
+            <defaultValue>true</defaultValue>
+        </fields>
+</CustomObject>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>68.0</apiVersion>
+    <description>Creates an approval task when an approval-gated action is attempted without approval. The agent may prepare the request; it may not approve it.</description>
+    <interviewLabel>Refund Approval Request {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Refund Approval Request</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value><stringValue>LightningFlowBuilder</stringValue></value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>BuilderVersion</name>
+        <value><stringValue>68.0</stringValue></value>
+    </processMetadataValues>
+    <processType>AutoLaunched</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Create_Approver_Task</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <triggerType>RecordAfterSave</triggerType>
+    <object>Agent_Action_Audit__c</object>
+    <objectType>Agent_Action_Audit__c</objectType>
+    <label>On Blocked Approval Action</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value><stringValue>LightningFlowBuilder</stringValue></value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>BuilderVersion</name>
+        <value><stringValue>68.0</stringValue></value>
+    </processMetadataValues>
+    <filters>
+        <field>Error_Code__c</field>
+        <operator>EqualTo</operator>
+        <value><stringValue>APPROVAL_REQUIRED</stringValue></value>
+    </filters>
+    <filterLogic>and</filterLogic>
+    <recordCreates>
+        <name>Create_Approver_Task</name>
+        <label>Create Approver Task</label>
+        <locationX>176</locationX>
+        <locationY>158</locationY>
+        <connector><targetReference>End</targetReference></connector>
+        <inputAssignments>
+            <value><elementReference>Description</elementReference></value>
+            <value><stringValue>The agent attempted an approval-gated action and was correctly blocked. Approve only if the amount is within policy.</stringValue></value>
+            <name>Description</name>
+        </inputAssignments>
+        <inputAssignments>
+            <value><elementReference>Subject</elementReference></value>
+            <value><stringValue>Approve refund action (session {!$Record.Session_Id__c})</stringValue></value>
+            <name>Subject</name>
+        </inputAssignments>
+        <inputAssignments>
+            <value><elementReference>WhatId</elementReference></value>
+            <value><elementReference>$Record.Id</elementReference></value>
+            <name>WhatId</name>
+        </inputAssignments>
+        <inputAssignments>
+            <value><elementReference>Status</elementReference></value>
+            <value><stringValue>Not Started</stringValue></value>
+            <name>Status</name>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <end>
+        <locationX>400</locationX>
+        <locationY>200</locationY>
+    </end>
+</Flow>

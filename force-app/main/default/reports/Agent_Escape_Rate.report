@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <name>Agent_Escape_Rate</name>
+    <reportType>Agent_Interaction_Log__c</reportType>
+    <scope>user</scope>
+    <summary>Escalation and refusal rate by outcome. Rising refusals mean the grounding or instruction set is too thin; rising escalations usually mean the routing threshold is set too high.</summary>
+    <timeRangeFilter>
+        <startDate>2026-01-01</startDate>
+    </timeRangeFilter>
+</Report>

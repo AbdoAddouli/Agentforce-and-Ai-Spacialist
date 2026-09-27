@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <filter>
+        <field>Success__c</field>
+        <operator>EqualTo</operator>
+        <value>false</value>
+    </filter>
+    <name>Action_Failure_Triage</name>
+    <reportType>Agent_Action_Audit__c</reportType>
+    <scope>user</scope>
+    <summary>Failed action attempts with their error codes. The actionable slice of the audit log.</summary>
+    <timeRangeFilter>
+        <startDate>2026-01-01</startDate>
+    </timeRangeFilter>
+</Report>

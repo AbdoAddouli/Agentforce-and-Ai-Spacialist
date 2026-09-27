@@ -1,0 +1,30 @@
+# Metadata to EXCLUDE from `sf project deploy start`
+# Mirrors the reference Dev I & II project: keep the deployable surface explicit.
+
+# Package manifests & local-only tooling
+manifest/
+config/
+scripts/
+docs/
+.github/
+.vscode/
+
+# Repo docs
+README.md
+ARCHITECTURE.md
+CONTRIBUTING.md
+
+# Node
+node_modules/
+package.json
+package-lock.json
+jest.config.js
+eslint.config.js
+.prettierrc
+.prettierignore
+
+# Guides (markdown only lives outside force-app, listed here defensively)
+developer Agentforce Specialist Roadmap/
+**/*.md
+**/jsconfig.json
+**/.eslintrc.json

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Prompt Template Usage</label>
+    <pluralLabel>Prompt Template Usage Records</pluralLabel>
+    <description>Links a prompt version to the sessions that used it, so a regression is attributable.</description>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <sharingModel>ReadWrite</sharingModel>
+    <enableActivities>false</enableActivities>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <visibility>Public</visibility>
+        <fields>
+          <fullName>Name</fullName>
+          <label>Name</label>
+          <type>Text</type>
+          <length>80</length>
+          <required>true</required>
+        </fields>
+        <fields>
+          <fullName>Template_Name__c</fullName>
+          <label>Template Name</label>
+          <required>true</required>
+          <type>Text</type>
+            <length>80</length>
+        </fields>
+        <fields>
+          <fullName>Version__c</fullName>
+          <label>Version</label>
+          <type>Number</type>
+            <precision>4</precision>
+            <scale>0</scale>
+        </fields>
+        <fields>
+          <fullName>Agent_Definition__c</fullName>
+          <label>Agent</label>
+          <type>Lookup</type>
+            <referenceTo>Agent_Definition__c</referenceTo>
+        </fields>
+        <fields>
+          <fullName>Used_On__c</fullName>
+          <label>Used On</label>
+          <type>Date</type>
+        </fields>
+        <fields>
+          <fullName>Success__c</fullName>
+          <label>Success</label>
+          <type>Checkbox</type>
+            <defaultValue>true</defaultValue>
+        </fields>
+        <fields>
+          <fullName>Notes__c</fullName>
+          <label>Notes</label>
+          <type>Text</type>
+            <length>255</length>
+        </fields>
+</CustomObject>

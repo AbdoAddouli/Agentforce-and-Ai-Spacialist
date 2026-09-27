@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Token Usage</label>
+    <pluralLabel>Token Usage Records</pluralLabel>
+    <description>Raw token counts per session, retained separately from billed credits.</description>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <sharingModel>ReadWrite</sharingModel>
+    <enableActivities>false</enableActivities>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <visibility>Public</visibility>
+        <fields>
+          <fullName>Name</fullName>
+          <label>Name</label>
+          <type>Text</type>
+          <length>80</length>
+          <required>true</required>
+        </fields>
+        <fields>
+          <fullName>Session_Id__c</fullName>
+          <label>Session Id</label>
+          <required>true</required>
+          <type>Text</type>
+            <length>80</length>
+        </fields>
+        <fields>
+          <fullName>Agent_Definition__c</fullName>
+          <label>Agent</label>
+          <type>Lookup</type>
+            <referenceTo>Agent_Definition__c</referenceTo>
+        </fields>
+        <fields>
+          <fullName>Input_Tokens__c</fullName>
+          <label>Input Tokens</label>
+          <type>Number</type>
+            <precision>12</precision>
+            <scale>0</scale>
+        </fields>
+        <fields>
+          <fullName>Output_Tokens__c</fullName>
+          <label>Output Tokens</label>
+          <type>Number</type>
+            <precision>12</precision>
+            <scale>0</scale>
+        </fields>
+        <fields>
+          <fullName>Total_Tokens__c</fullName>
+          <label>Total Tokens</label>
+          <type>Number</type>
+            <precision>12</precision>
+            <scale>0</scale>
+        </fields>
+        <fields>
+          <fullName>Recorded_On__c</fullName>
+          <label>Recorded On</label>
+          <type>DateTime</type>
+        </fields>
+</CustomObject>

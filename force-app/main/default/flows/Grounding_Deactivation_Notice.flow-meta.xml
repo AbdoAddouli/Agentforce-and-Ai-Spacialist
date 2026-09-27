@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>68.0</apiVersion>
+    <description>Notifies the knowledge owner when a grounding source is switched off. An inactive source returns zero records by design, which looks identical to a content failure until someone knows the source was deactivated.</description>
+    <interviewLabel>Grounding Deactivation Notice {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Grounding Deactivation Notice</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value><stringValue>LightningFlowBuilder</stringValue></value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>BuilderVersion</name>
+        <value><stringValue>68.0</stringValue></value>
+    </processMetadataValues>
+    <processType>AutoLaunched</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Notify_Knowledge_Owner</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <triggerType>RecordAfterSave</triggerType>
+    <object>Grounding_Source__c</object>
+    <objectType>Grounding_Source__c</objectType>
+    <label>On Source Deactivated</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value><stringValue>LightningFlowBuilder</stringValue></value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>BuilderVersion</name>
+        <value><stringValue>68.0</stringValue></value>
+    </processMetadataValues>
+    <filters>
+        <field>Is_Active__c</field>
+        <operator>EqualTo</operator>
+        <value><stringValue>false</stringValue></value>
+    </filters>
+    <filterLogic>and</filterLogic>
+    <alerts>
+        <name>Notify_Knowledge_Owner</name>
+        <label>Notify Knowledge Owner</label>
+        <description>A grounded agent will return nothing until this is reversed.</description>
+        <locationX>176</locationX>
+        <locationY>158</locationY>
+        <connector><targetReference>End</targetReference></connector>
+        <alertFields>Name</alertFields>
+        <alertFields>Source_Type__c</alertFields>
+        <recipientAddress>knowledge@example.com</recipientAddress>
+        <recipientType>Admins</recipientType>
+        <subject>Grounding source deactivated: {!$Record.Name}</subject>
+    </alerts>
+    <end>
+        <locationX>400</locationX>
+        <locationY>200</locationY>
+    </end>
+</Flow>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AssignmentRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <description>Any failed action is routed to the agent owner for triage rather than left in the audit queue.</description>
+    <fullName>Failed_Action_Escalation</fullName>
+    <ruleAssignments>
+        <assignedEntityType>Queue</assignedEntityType>
+        <assignedEntity>Agent Triage</assignedEntity>
+        <assignmentRuleType>Unassigned</assignmentRuleType>
+    </ruleAssignments>
+    <conditions>
+        <field>Success__c</field>
+        <operator>EqualTo</operator>
+        <value>false</value>
+    </conditions>
+</AssignmentRule>

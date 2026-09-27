@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AssignmentRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <description>An agent that becomes active must have a business owner before it can be run.</description>
+    <fullName>Active_Agent_Ownership</fullName>
+    <ruleAssignments>
+        <assignedEntityType>Queue</assignedEntityType>
+        <assignedEntity>Agent Operations</assignedEntity>
+        <assignmentRuleType>Unassigned</assignmentRuleType>
+    </ruleAssignments>
+    <conditions>
+        <field>Status__c</field>
+        <operator>EqualTo</operator>
+        <value>Active</value>
+    </conditions>
+</AssignmentRule>

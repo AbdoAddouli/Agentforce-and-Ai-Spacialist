@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <name>Grounding_Source_Coverage</name>
+    <reportType>Grounding_Source__c</reportType>
+    <scope>user</scope>
+    <summary>Which grounding sources are live, what they are scoped to and how many records they may return. A live source with a low Max_Records is a precision setting, not an oversight.</summary>
+    <timeRangeFilter>
+        <startDate>2026-01-01</startDate>
+    </timeRangeFilter>
+</Report>

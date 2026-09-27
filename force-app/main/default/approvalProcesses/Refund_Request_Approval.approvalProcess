@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <approvalStepCustomFields>1</approvalStepCustomFields>
+    <approvalType>Custom</approvalType>
+    <description>Refunds over the materiality threshold require a named human approver. The agent may prepare the request; it may not approve it.</description>
+    <entryCriteria>
+        <field>Requires_Approval__c</field>
+        <operator>EqualTo</operator>
+        <value>true</value>
+    </entryCriteria>
+    <field>Action_Definition__c</field>
+    <label>Refund Request Approval</label>
+    <processType>Custom</processType>
+    <showSubmitter>false</showSubmitter>
+    <stepActions>
+        <step>
+            <name>Finance Approval</name>
+            <label>Finance Approval</label>
+            <nextSteps>
+                <nextStep>1</nextStep>
+            </nextSteps>
+        </step>
+    </stepActions>
+    <activeVersion>1</activeVersion>
+    <emailTemplate>Refund_Request_Notification</emailTemplate>
+</ApprovalProcess>

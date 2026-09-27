@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>68.0</apiVersion>
+    <description>Publishes Agent_Session_Escaped__e whenever a session is escalated rather than answered. A routing decline is a designed outcome, so this is a subscription, not an alarm.</description>
+    <interviewLabel>Agent Routing Fallback {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Agent Routing Fallback</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value><stringValue>LightningFlowBuilder</stringValue></value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>BuilderVersion</name>
+        <value><stringValue>68.0</stringValue></value>
+    </processMetadataValues>
+    <processType>AutoLaunched</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Publish_Session_Escaped</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <triggerType>RecordAfterSave</triggerType>
+    <object>Agent_Interaction_Log__c</object>
+    <objectType>Agent_Interaction_Log__c</objectType>
+    <label>On Outcome Escalated</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value><stringValue>LightningFlowBuilder</stringValue></value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>BuilderVersion</name>
+        <value><stringValue>68.0</stringValue></value>
+    </processMetadataValues>
+    <filters>
+        <field>Outcome__c</field>
+        <operator>EqualTo</operator>
+        <value><stringValue>Escalated</stringValue></value>
+    </filters>
+    <filterLogic>and</filterLogic>
+    <processMetadataValues>
+        <name>ObjectType</name>
+        <value><stringValue>Agent_Interaction_Log__c</stringValue></value>
+    </processMetadataValues>
+    <platformEvents>
+        <name>Publish_Session_Escaped</name>
+        <label>Publish Session Escaped</label>
+        <description>Drives Command Center panels and the credit budget alert.</description>
+        <locationX>176</locationX>
+        <locationY>158</locationY>
+        <connector><targetReference>End</targetReference></connector>
+        <eventName>Agent_Session_Escaped__e</eventName>
+        <objectType>Agent_Session_Escaped__e</objectType>
+        <inputValues>
+            <name>Session_Id__c</name><value><elementReference>$Record.Session_Id__c</elementReference></value>
+        </inputValues>
+        <inputValues>
+            <name>Reason__c</name><value><elementReference>$Record.Outcome__c</elementReference></value>
+        </inputValues>
+        <inputValues>
+            <name>Credits_Used__c</name><value><elementReference>$Record.Credits_Used__c</elementReference></value>
+        </inputValues>
+    </platformEvents>
+    <end>
+        <locationX>400</locationX>
+        <locationY>200</locationY>
+    </end>
+</Flow>

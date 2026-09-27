@@ -1,0 +1,39 @@
+{
+  "name": "agentforce-and-ai-spacialist",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Salesforce Certified Agentforce Specialist learning academy: SFDX metadata org + interactive GitHub Pages study site.",
+  "license": "MIT",
+  "scripts": {
+    "check": "node scripts/check-curriculum.mjs && node scripts/check-project.mjs",
+    "test": "node --test scripts/",
+    "lint": "eslint force-app scripts",
+    "lint:fix": "eslint force-app scripts --fix",
+    "test:apex": "sf apex run test --test-level RunLocalTests --code-coverage --result-format human --wait 20",
+    "test:quick": "sf apex run test -t PromptTemplateServiceTest --result-format human --wait 20",
+    "prettier": "prettier --write \"**/*.{cls,trigger,xml,json,md,js,html,css}\"",
+    "prettier:check": "prettier --check \"**/*.{cls,trigger,xml,json,md,js,html,css}\"",
+    "manifest:generate": "node scripts/gen-manifest.mjs",
+    "deploy": "sf project deploy start --source-dir force-app",
+    "deploy:validate": "sf project deploy start --source-dir force-app --dry-run --test-level NoTestRun",
+    "report:anomaly": "sf project deploy report",
+    "org:create": "sf org create scratch -f config/project-scratch-def.json -a afs --duration-days 7",
+    "org:open": "sf org open --target-org afs",
+    "org:delete": "sf org delete scratch --target-org afs --no-prompt",
+    "site:serve": "npx --yes http-server docs -p 8080 -c-1",
+    "site:check": "node scripts/check-curriculum.mjs",
+    "prepare": "husky || true"
+  },
+  "devDependencies": {
+    "@lwc/eslint-plugin-lwc": "^1.7.2",
+    "@salesforce/eslint-config-apex": "^4.2.0",
+    "@salesforce/eslint-config-lwc": "^3.5.2",
+    "eslint": "^8.57.0",
+    "eslint-plugin-apex": "^2.0.0",
+    "husky": "^9.0.11",
+    "jest": "^29.7.0",
+    "prettier": "^3.2.5",
+    "prettier-plugin-apex": "^2.1.2",
+    "http-server": "^14.1.1"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Agentforce Services",
+      "type": "apex",
+      "request": "launch",
+      "entryPoint": "PromptTemplateServiceTest.behaviourUnderTest",
+      "outFiles": ["${workspaceFolder}/**/force-app/main/default/classes/*"],
+      "sfdxLoginUrl": "https://login.salesforce.com"
+    },
+    {
+      "name": "Debug Agent Script Harness",
+      "type": "apex",
+      "request": "launch",
+      "entryPoint": "AgentScriptServiceTest.scriptCompilesIntoSubagentPlan",
+      "outFiles": ["${workspaceFolder}/**/force-app/main/default/classes/*"],
+      "sfdxLoginUrl": "https://login.salesforce.com"
+    }
+  ]
+}

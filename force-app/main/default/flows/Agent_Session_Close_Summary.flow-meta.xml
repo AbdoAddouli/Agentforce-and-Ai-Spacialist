@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>68.0</apiVersion>
+    <description>Emails the business owner when a session ends unanswered, so a run that needs a person reaches a person.</description>
+    <interviewLabel>Agent Session Close Summary {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Agent Session Close Summary</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value><stringValue>LightningFlowBuilder</stringValue></value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>BuilderVersion</name>
+        <value><stringValue>68.0</stringValue></value>
+    </processMetadataValues>
+    <processType>AutoLaunched</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Notify_Business_Owner</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <triggerType>RecordAfterSave</triggerType>
+    <object>Agent_Interaction_Log__c</object>
+    <objectType>Agent_Interaction_Log__c</objectType>
+    <label>On Unanswered Session</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value><stringValue>LightningFlowBuilder</stringValue></value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>BuilderVersion</name>
+        <value><stringValue>68.0</stringValue></value>
+    </processMetadataValues>
+    <filters>
+        <field>Outcome__c</field>
+        <operator>EqualTo</operator>
+        <value><stringValue>Refused</stringValue></value>
+    </filters>
+    <filterLogic>and</filterLogic>
+    <alerts>
+        <name>Notify_Business_Owner</name>
+        <label>Notify Business Owner</label>
+        <description>Sent when the agent asked a clarifying question rather than guessing.</description>
+        <locationX>176</locationX>
+        <locationY>158</locationY>
+        <connector><targetReference>End</targetReference></connector>
+        <alertFields>Session_Id__c</alertFields>
+        <alertFields>User_Message__c</alertFields>
+        <recipientAddress>agentowner@example.com</recipientAddress>
+        <recipientType>Admins</recipientType>
+        <subject>Session {!$Record.Session_Id__c} ended with a clarification request</subject>
+    </alerts>
+    <end>
+        <locationX>400</locationX>
+        <locationY>200</locationY>
+    </end>
+</Flow>

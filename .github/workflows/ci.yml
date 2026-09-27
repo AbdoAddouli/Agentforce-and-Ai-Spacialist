@@ -1,0 +1,121 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ------------------------------------------------------------------ #
+  # Local checks. These use only Node built-ins, so they need no
+  # dependency install and cannot fail because of a registry outage.
+  # ------------------------------------------------------------------ #
+  validate:
+    name: Validate curriculum, answers and metadata
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Curriculum and project checks
+        run: npm run check
+
+      - name: Tests for the checkers
+        run: npm test
+
+  # ------------------------------------------------------------------ #
+  # Apex verification. Needs a Dev Hub, so it is manual only and is
+  # deliberately not a dependency of the Pages job. A missing scratch org
+  # must never be the reason the study site is offline.
+  # ------------------------------------------------------------------ #
+  apex:
+    name: Deploy + Apex tests on a scratch org
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Cache Salesforce CLI
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/sfdx-cli
+            ~/.local/share/sfdx-cli
+          key: sfdx-${{ runner.os }}-${{ hashFiles('sfdx-project.json') }}
+
+      - name: Install Salesforce CLI
+        run: npm install --global @salesforce/cli
+
+      - name: Authorize Dev Hub
+        uses: salesforce/actions/setup-sfdx@v1
+
+      - name: Create scratch org
+        run: sf org create scratch --definition-file config/project-scratch-def.json --alias afsci --duration-days 1 --set-default
+
+      - name: Deploy source
+        run: sf project deploy start --source-dir force-app --target-org afsci --wait 20
+
+      - name: Run Apex tests with coverage
+        run: |
+          sf apex run test --target-org afsci \
+            --test-level RunLocalTests \
+            --code-coverage \
+            --result-format human \
+            --output-dir ./test-results \
+            --wait 30
+
+      - name: Delete scratch org
+        if: always()
+        run: sf org delete scratch --target-org afsci --no-prompt
+
+  # ------------------------------------------------------------------ #
+  # Static site. Depends only on `validate`, so the site publishes even if
+  # the Salesforce tooling is unavailable.
+  # ------------------------------------------------------------------ #
+  pages:
+    name: Publish the study site
+    if: github.ref == 'refs/heads/main'
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Upload static site (docs/)
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+      - name: Deploy to Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

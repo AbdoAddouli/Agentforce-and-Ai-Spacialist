@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <body>The agent is retrieving nothing useful from its grounding source.<br/><br/>Source: {!Grounding_Source__c.Name}<br/>Max records: {!Grounding_Source__c.Max_Records__c}<br/><br/>If content changed status, republish it. Do not widen the scope: a wider scope trades a missing answer for a wrong one.</body>
+    <description>The agent is retrieving nothing useful from its grounding source.Source: {!Grounding_Sourc</description>
+    <name>Grounding_Content_Refresh_Needed</name>
+    <subject>Grounding miss rate above threshold: content change suspected</subject>
+    <type>custom</type>
+</EmailTemplate>

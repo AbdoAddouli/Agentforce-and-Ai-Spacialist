@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Grounding Source</label>
+    <pluralLabel>Grounding Sources</pluralLabel>
+    <description>Bounded retrieval target. Scope is fixed here, never widened at runtime to avoid a miss.</description>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <sharingModel>ReadWrite</sharingModel>
+    <enableActivities>false</enableActivities>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <visibility>Public</visibility>
+        <fields>
+          <fullName>Name</fullName>
+          <label>Name</label>
+          <type>Text</type>
+          <length>80</length>
+          <required>true</required>
+        </fields>
+        <fields>
+          <fullName>Source_Type__c</fullName>
+          <label>Source Type</label>
+          <type>Picklist</type>
+            <valueSet>
+              <restricted>true</restricted>
+<valueSetDefinition>
+                <sorted>false</sorted>
+                <value><fullName>LightningKnowledge</fullName><default>true</default></value>
+                <value><fullName>Data360</fullName><default>false</default></value>
+                <value><fullName>ObjectRecords</fullName><default>false</default></value>
+                <value><fullName>MCP</fullName><default>false</default></value>
+              </valueSetDefinition>
+            </valueSet>
+        </fields>
+        <fields>
+          <fullName>Object_Api_Name__c</fullName>
+          <label>Object API Name</label>
+          <type>Text</type>
+            <length>80</length>
+        </fields>
+        <fields>
+          <fullName>Scope_Json__c</fullName>
+          <label>Scope JSON</label>
+          <type>LongTextArea</type>
+            <length>4000</length>
+            <visibleLines>6</visibleLines>
+        </fields>
+        <fields>
+          <fullName>Max_Records__c</fullName>
+          <label>Max Records</label>
+          <type>Number</type>
+            <precision>5</precision>
+            <scale>0</scale>
+            <defaultValue>10</defaultValue>
+        </fields>
+        <fields>
+          <fullName>Relevance_Threshold__c</fullName>
+          <label>Relevance Threshold</label>
+          <type>Number</type>
+            <precision>5</precision>
+            <scale>3</scale>
+            <defaultValue>0.200</defaultValue>
+        </fields>
+        <fields>
+          <fullName>Is_Active__c</fullName>
+          <label>Active</label>
+          <type>Checkbox</type>
+            <defaultValue>true</defaultValue>
+        </fields>
+</CustomObject>
