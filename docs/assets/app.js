@@ -39,7 +39,10 @@ const esc = (s = '') => s.replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;',
 const cyrb53 = s => { let h = 9; for (let i = 0; i < s.length; i++) h = Math.imul(h ^ s.charCodeAt(i), 2654435761); return (h ^ h >>> 9) >>> 0; };
 
 const MODULES = ACADEMY;
-const REPO = 'https://github.com/AbdoAddouli/Agentforce-and-Ai-Spacialist';
+// REPO is declared once, in curriculum.js, and shared like GUIDE/EXAM/GLOSSARY.
+// Redeclaring it here is a SyntaxError: these are classic scripts sharing one
+// global scope, so a duplicate top-level const/let aborts this whole file and
+// the site renders blank. check-project.mjs asserts there are no such clashes.
 const REPO_BLOB = REPO + '/blob/main/';
 const MAINT_MODULES = MODULES.filter(m => m.maint);
 
@@ -135,6 +138,21 @@ const view = $('#view');
 function render() {
   const mod = route.mid ? byId(route.mid) : null;
   const r = parseHash(); // keep in sync with friendly URLs
+
+  // These views dereference `mod` unconditionally. A hand-edited or stale URL
+  // breaks that in two ways: #/guide/01-Agentforce-Fundamentals.md passes a
+  // filename where a module id is expected, and #/phase/ passes nothing at all.
+  // byId() then yields undefined or null and the renderer throws on mod.id,
+  // leaving a half-rendered page. Send those routes home instead.
+  // parseHash() reads location.hash, so the hash has to be rewritten too, not
+  // just `route` - otherwise the next render() sees the same bad hash and loops.
+  const NEEDS_MODULE = { phase: 1, lesson: 1, quiz: 1, guide: 1 };
+  if (NEEDS_MODULE[r.view] && !mod) {
+    history.replaceState(null, '', '#/');
+    route = { view: 'home' };
+    return render();
+  }
+
   const pageName = r.view === 'exam' ? 'Exam blueprint'
     : r.view === 'whats-new' ? 'What changed'
     : r.view === 'glossary' ? 'Glossary'

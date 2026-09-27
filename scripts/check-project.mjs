@@ -232,6 +232,71 @@ export function checkManifestIsFresh() {
   return declared.size ? [] : ['manifest/package.xml: no members declared'];
 }
 
+/**
+ * docs/index.html loads curriculum.js, answers.js and app.js as classic
+ * scripts, so all three share one global scope. A top-level const/let that is
+ * declared twice - in the same file or across two files - is a SyntaxError at
+ * load time, and it aborts that entire file. When it hits app.js the site
+ * renders a blank page with no visible error.
+ *
+ * Every other check here reads or evaluates these files in isolation, so
+ * nothing else can see this class of bug. Node's --check cannot either: it
+ * validates one file at a time. This check compares all three together.
+ */
+const BROWSER_SCRIPTS = ['curriculum.js', 'answers.js', 'app.js'];
+
+/** Top-level declarations only: column 0, so indented function locals are ignored. */
+export function topLevelDeclarations(src) {
+  const names = [];
+  for (const line of src.split('\n')) {
+    // `export`/`import` are not used in these files, but be safe about it.
+    const m = /^(?:const|let|var|function|class)\s+([A-Za-z_$][\w$]*)/.exec(line);
+    if (m) names.push(m[1]);
+  }
+  return names;
+}
+
+/**
+ * Pure core of the collision check, so it can be unit tested with synthetic
+ * sources. `files` maps a script name to its source text.
+ */
+export function globalCollisions(files) {
+  const errors = [];
+  const seen = new Map(); // name -> [file]
+  for (const [file, src] of Object.entries(files)) {
+    for (const name of topLevelDeclarations(src)) {
+      if (!seen.has(name)) seen.set(name, []);
+      seen.get(name).push(file);
+    }
+  }
+  for (const [name, files_] of seen) {
+    if (files_.length <= 1) continue;
+    const uniq = [...new Set(files_)];
+    errors.push(
+      uniq.length > 1
+        ? `"${name}" is declared at top level in ${uniq.length} scripts (${uniq.join(', ')}); ` +
+          'classic scripts share one global scope, so this is a SyntaxError and the site renders blank'
+        : `"${name}" is declared twice at top level in ${uniq[0]}; this is a SyntaxError`
+    );
+  }
+  return errors;
+}
+
+export function checkGlobalCollisions() {
+  const errors = [];
+  const files = {};
+  for (const file of BROWSER_SCRIPTS) {
+    const p = join(ROOT, 'docs', 'assets', file);
+    if (!existsSync(p)) {
+      errors.push(`docs/assets/${file}: missing`);
+      continue;
+    }
+    files[file] = readFileSync(p, 'utf8');
+  }
+  errors.push(...globalCollisions(files));
+  return errors;
+}
+
 export const CHECKS = {
   xml: checkXml,
   companions: checkCompanions,
@@ -239,6 +304,7 @@ export const CHECKS = {
   triggerNaming: checkTriggerNaming,
   json: checkJson,
   manifest: checkManifestIsFresh,
+  globals: checkGlobalCollisions,
 };
 
 /* ------------------------------------------------------------------ *

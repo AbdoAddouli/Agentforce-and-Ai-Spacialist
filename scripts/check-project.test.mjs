@@ -4,10 +4,13 @@ import {
   checkXmlStructure,
   checkTriggerName,
   customObjectRefsIn,
+  topLevelDeclarations,
+  checkGlobalCollisions,
+  globalCollisions,
   CHECKS,
   walk,
 } from './check-project.mjs';
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { ROOT } from './check-project.mjs';
 
@@ -144,4 +147,60 @@ test('no Apex references a custom object that does not exist', () => {
     }
   }
   assert.equal(objects.size, 12, 'expected 12 custom objects');
+});
+
+/* ---------------- top-level global collisions ----------------------- */
+
+test('topLevelDeclarations sees column-0 declarations only', () => {
+  const src = [
+    'const A = 1;',
+    'let B = 2;',
+    'function C() {',
+    '  const indentedLocal = 3;',
+    '  return indentedLocal;',
+    '}',
+    'class D {}',
+  ].join('\n');
+  assert.deepEqual(topLevelDeclarations(src), ['A', 'B', 'C', 'D']);
+});
+
+test('a name declared in two browser scripts is reported', () => {
+  // This is the bug that shipped a blank site: REPO was declared in both
+  // curriculum.js and app.js. Classic scripts share one global scope, so the
+  // second declaration is a SyntaxError that aborts app.js entirely.
+  const errors = globalCollisions({
+    'curriculum.js': "const REPO = 'https://x';\nconst GUIDE = REPO;\n",
+    'answers.js': "const TICK = '`';\n",
+    'app.js': "const REPO = 'https://x';\nconst VIEW = 1;\n",
+  });
+  assert.equal(errors.length, 1);
+  assert.match(errors[0], /"REPO"/);
+  assert.match(errors[0], /curriculum\.js, app\.js/);
+  assert.match(errors[0], /SyntaxError/);
+});
+
+test('distinct top-level names across scripts are fine', () => {
+  assert.deepEqual(
+    globalCollisions({
+      'curriculum.js': "const REPO = 'https://x';\n",
+      'answers.js': "const TICK = '`';\n",
+      'app.js': "const VIEW = 1;\n",
+    }),
+    []
+  );
+});
+
+test('a name declared twice in one script is reported', () => {
+  const errors = globalCollisions({ 'app.js': 'const A = 1;\nlet A = 2;\n' });
+  assert.equal(errors.length, 1);
+  assert.match(errors[0], /twice at top level/);
+});
+
+test('the shipped browser scripts have no top-level collisions', () => {
+  assert.deepEqual(checkGlobalCollisions(), []);
+  for (const file of ['curriculum.js', 'answers.js', 'app.js']) {
+    const p = join(ROOT, 'docs', 'assets', file);
+    assert.ok(existsSync(p), `${file} should exist`);
+    assert.ok(topLevelDeclarations(readFileSync(p, 'utf8')).length > 0, `${file} should declare globals`);
+  }
 });
